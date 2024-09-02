@@ -1,0 +1,17 @@
+
+.star-rating{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+.active , .inactive{
+    font-size: 40px;
+}
+
+.active {
+    color: #fff700
+}
+.inactive {
+    color: #000000;
+}
