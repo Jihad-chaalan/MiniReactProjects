@@ -30,11 +30,11 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       animation: shake 0.5s ease-in-out;
     }
-    .container{    display: grid;
+    .data-container{    display: grid;
         align-items: center;
         justify-content: center;}
 
-    .container p {
+    .data-container p {
         width: 250px;
         font-size: 1.2rem;
         color: #333;
@@ -46,9 +46,30 @@
         transition: background-color 0.3s, transform 0.3s;
       }
       
-      .container p:hover {
+      .data-container p:hover {
         background-color: #e0f7fa;
         transform: scale(1.05);
+      }
+
+      .scroll-progress-tracking-container{
+        width: 100%;
+        height: 10px;
+        background: #455a64;
+      }
+
+      .current-progress{
+        height: 10px;
+        background: #80cbc4;
+        width: 0%;
+      }
+      .top-container{
+        position: fixed;
+        top: 0%;
+        z-index: 1;
+        width: 100%;
+        text-align: center;
+        background-color: #ff8a65;
+        color: #fff;
       }
       
     
