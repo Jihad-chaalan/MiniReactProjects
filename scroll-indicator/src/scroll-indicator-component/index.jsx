@@ -6,6 +6,8 @@ export default function ScrollIndicator({ url }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [scrollPercentage, setScrollPercentage] = useState(0);
+  const [renderedData, setRenderedData] = useState([]);
+  const [numRendered, setNumRendered] = useState(40);
 
   async function fetchData(getUrl) {
     try {
@@ -17,6 +19,9 @@ export default function ScrollIndicator({ url }) {
       if (data?.products?.length) {
         setData(data.products);
         setLoading(false);
+
+        //If the number of products is higher than the size of the data.products array, it will not throw an error in the slice method.
+        // setRenderedData(data.products.slice(0, numRendered + 1));
       }
     } catch (error) {
       console.log(error);
@@ -39,15 +44,23 @@ export default function ScrollIndicator({ url }) {
     setScrollPercentage((howMuchScrolled / height) * 100);
     console.log((howMuchScrolled / height) * 100);
   }
+  const showMoreData = () => setNumRendered(numRendered + 10);
 
   useEffect(() => {
     fetchData(url);
   }, [url]);
+  useEffect(() => {
+    //If the number of products is higher than the size of the data.products array, it will not throw an error in the slice method.
+    setRenderedData(data.slice(0, numRendered + 1));
+  }, [numRendered, data]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScrollpercentage);
     return () => window.removeEventListener("scroll", handleScrollpercentage);
   }, []);
+  useEffect(() => {
+    handleScrollpercentage(); // Trigger recalculation after content update
+  }, [renderedData]);
 
   if (error) {
     return <div className="error">Error! {error}</div>;
@@ -69,8 +82,22 @@ export default function ScrollIndicator({ url }) {
       </div>
       <div className="data-container">
         {data && data.length
-          ? data.map((product) => <p key={product.id}>{product.title}</p>)
+          ? renderedData.map((product) => (
+              <div key={product.id}>
+                <p>{product.title}</p>
+                <img
+                  className="products-images"
+                  src={product.images}
+                  alt=""
+                ></img>
+              </div>
+            ))
           : null}
+      </div>
+      <div className="load-btn">
+        {renderedData.length < data.length ? (
+          <button onClick={showMoreData}>Load More...</button>
+        ) : null}
       </div>
     </div>
   );

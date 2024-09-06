@@ -71,6 +71,38 @@
         background-color: #ff8a65;
         color: #fff;
       }
+      .load-btn {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0; 
+      }
+      
+   
+      .load-btn button {
+        padding: 10px 20px;
+        font-size: 1rem;
+        font-weight: bold;
+        color: #fff;
+        background-color: #007bff; 
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      
+      .load-btn button:hover {
+        background-color: #0056b3; 
+        transform: scale(1.05); 
+      }
+      .products-images{
+        width: 250px;
+        height: auto;
+        transition: 0.3s;
+      }
+      .products-images:hover{
+        transform:scale(1.05);
+      }
       
     
 
